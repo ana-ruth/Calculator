@@ -31,9 +31,23 @@ function operate(num1, operator, num2){
     return result;
 }
 
+function display()
+{
+    let displayValue = " ";
+    const buttons = document.querySelectorAll('.clicked');
 
+    buttons.forEach(button => {
+        button.addEventListener('click', function()
+        {
+            const currentNum = this.textContent;
+            displayValue += currentNum;
+            document.querySelector(".display").textContent = displayValue;
+        });
+    });
 
+}
 
+display();
 
 
 

@@ -56,7 +56,8 @@ function display()
     {        
         displayValue =  getNumbers(displayValue);
         document.querySelector(".display").textContent = displayValue;
-        
+
+
         if(operator.length > 1)
         {
             operator.shift();
@@ -70,6 +71,7 @@ function display()
 }
 
 display();
+clearDisplay();
 
 function getNumbers(displayValue)
 {
@@ -80,3 +82,16 @@ function getNumbers(displayValue)
     return operate(firstNum,operator[0],secondNum);
 }
 
+function clearDisplay()
+{
+    const clear =  document.querySelector('.clear');
+    clear.addEventListener('click',function()
+    {        
+        displayValue =  " ";
+        document.querySelector('.display').textContent = displayValue;
+        firstNum = 0;
+        secondNum = 0;
+        operator = [];
+    });
+
+}

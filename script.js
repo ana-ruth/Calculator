@@ -4,7 +4,7 @@ function subtract(num1, num2){ return num1 - num2;}
 
 function multiply(num1, num2){ return num1 * num2;}
 
-function divide(num1, num2){ return num1 / num2;}
+function divide(num1, num2) { return num1 / num2;}
 
 let firstNum, secondNum;
 let operator = [];
@@ -31,10 +31,11 @@ function operate(num1, operator, num2){
     }
     return result;
 }
+let displayValue;
 
 function display()
 {
-    let displayValue = " ";
+    displayValue = " ";
     const buttons = document.querySelectorAll('.clicked');
 
     buttons.forEach(button => {
@@ -79,7 +80,13 @@ function getNumbers(displayValue)
     firstNum = Number(nums[0]);
     secondNum = Number(nums[1]);
 
-    return operate(firstNum,operator[0],secondNum);
+    if(secondNum === 0) { return 'undefined';}
+
+    let result =  operate(firstNum,operator[0],secondNum);
+
+    //answers with long decimals are rounded to prevent result
+    if(result == Math.floor(result)) return result;
+    else { return result.toFixed(5);}
 }
 
 function clearDisplay()

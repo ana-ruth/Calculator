@@ -68,15 +68,15 @@ function display()
     equalSign.addEventListener('click',function()
     {        
         displayValue =  getNumbers(displayValue);
-        document.getElementById("decimal").disabled = false;
+        document.querySelector(".display").textContent = displayValue;
+/*
+        if(operator.length >1)
+        {*/
+        //   operator.shift();
+       //     displayValue += operator[0];
+         //   document.querySelector(".display").textContent = displayValue;
+        //}
 
-
-        if(operator.length > 1)
-        {
-            operator.shift();
-            displayValue += operator[0];
-            document.querySelector(".display").textContent = displayValue;
-        }
         document.getElementById("decimal").disabled = false;
 
     });
@@ -93,13 +93,29 @@ function getNumbers(displayValue)
     firstNum = Number(nums[0]);
     secondNum = Number(nums[1]);
 
-    if(secondNum === 0) { return 'undefined';}
+    console.log(firstNum);
+    console.log(secondNum);
+    console.log(operator);
 
+    result = operate(firstNum,operator[0],secondNum);
+
+    if(operator.length >1)
+    {
+        result += operator[1];
+    }
+    operator.shift();
+
+    return result;
+
+    /*
+    if(secondNum === 0 && operator[0]=== '/'){return 'undefined';}
     let result =  operate(firstNum,operator[0],secondNum);
-
-    //answers with long decimals are rounded to prevent result
+*/
+    //answers with  decimals are rounded to prevent overflow on screen
+   /*
     if(result == Math.floor(result)) return result;
     else { return result.toFixed(5);}
+    */
 }
 
 function clearDisplay()
@@ -128,3 +144,4 @@ function decimal()
     });
 
 }
+

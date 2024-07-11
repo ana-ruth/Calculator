@@ -6,25 +6,26 @@ function multiply(num1, num2){ return num1 * num2;}
 
 function divide(num1, num2){ return num1 / num2;}
 
-let firstNum, secondNum, operator;
+let firstNum, secondNum;
+let operator = [];
 
 function operate(num1, operator, num2){
     let result;
     switch(operator)
     {
-        case "addition":
+        case "+":
             result = add(num1,num2);
             break;
 
-        case "subtraction":
+        case "-":
             result = subtract(num1,num2);
             break;
 
-        case "multiplication":
+        case "*":
             result = multiply(num1,num2);
             break;
 
-        case "division":
+        case "/":
             result = divide(num1,num2);
             break;
     }
@@ -39,15 +40,43 @@ function display()
     buttons.forEach(button => {
         button.addEventListener('click', function()
         {
+            if(button.textContent == '+') {operator.push('+');}
+            if(button.textContent == '-') {operator.push('-');}
+            if(button.textContent == '*') {operator.push('*');}
+            if(button.textContent == '/') {operator.push('/');}
+                
             const currentNum = this.textContent;
             displayValue += currentNum;
             document.querySelector(".display").textContent = displayValue;
         });
     });
 
+    const equalSign =  document.querySelector('.showResult');
+    equalSign.addEventListener('click',function()
+    {        
+        displayValue =  getNumbers(displayValue);
+        document.querySelector(".display").textContent = displayValue;
+        
+        if(operator.length > 1)
+        {
+            operator.shift();
+            displayValue += operator[0];
+            document.querySelector(".display").textContent = displayValue;
+        }
+
+    });
+    
+
 }
 
 display();
 
+function getNumbers(displayValue)
+{
+    let nums = displayValue.split(/[+/*-]/);
+    firstNum = Number(nums[0]);
+    secondNum = Number(nums[1]);
 
+    return operate(firstNum,operator[0],secondNum);
+}
 

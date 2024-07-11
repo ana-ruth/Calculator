@@ -41,10 +41,22 @@ function display()
     buttons.forEach(button => {
         button.addEventListener('click', function()
         {
-            if(button.textContent == '+') {operator.push('+');}
-            if(button.textContent == '-') {operator.push('-');}
-            if(button.textContent == '*') {operator.push('*');}
-            if(button.textContent == '/') {operator.push('/');}
+            if(button.textContent == '+') {
+                operator.push('+'); 
+                document.getElementById("decimal").disabled = false;
+            }
+            if(button.textContent == '-') {
+                operator.push('-');
+                document.getElementById("decimal").disabled = false;
+            }
+            if(button.textContent == '*') {
+                operator.push('*');
+                document.getElementById("decimal").disabled = false;
+            }
+            if(button.textContent == '/') {
+                operator.push('/');
+                document.getElementById("decimal").disabled = false;
+            }
                 
             const currentNum = this.textContent;
             displayValue += currentNum;
@@ -56,7 +68,7 @@ function display()
     equalSign.addEventListener('click',function()
     {        
         displayValue =  getNumbers(displayValue);
-        document.querySelector(".display").textContent = displayValue;
+        document.getElementById("decimal").disabled = false;
 
 
         if(operator.length > 1)
@@ -65,6 +77,7 @@ function display()
             displayValue += operator[0];
             document.querySelector(".display").textContent = displayValue;
         }
+        document.getElementById("decimal").disabled = false;
 
     });
     
@@ -99,6 +112,19 @@ function clearDisplay()
         firstNum = 0;
         secondNum = 0;
         operator = [];
+        document.getElementById("decimal").disabled = false;
+
+    });
+
+}
+
+decimal();
+function decimal()
+{
+    const decimal = document.querySelector('#decimal');
+    decimal.addEventListener('click',function()
+    {
+        document.getElementById("decimal").disabled = true;
     });
 
 }

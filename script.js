@@ -138,6 +138,25 @@ function display()
         document.querySelector(".display").textContent = displayValue;
     }); 
 
+    document.addEventListener('keydown',function(event)
+    {
+        let key = event.key;
+
+        switch (key) 
+        {
+            case "Backspace":
+            if(displayValue.charAt(displayValue.length-1) === "+" || displayValue.charAt(displayValue.length-1) === "-" || displayValue.charAt(displayValue.length-1) === "*" || displayValue.charAt(displayValue.length-1) === "/")
+                {
+                    operator.pop();
+                }
+        
+                //update display
+                displayValue = displayValue.slice(0,displayValue.length-1);
+                document.querySelector(".display").textContent = displayValue;
+                break;
+        }
+    });
+
 }
 
 display();

@@ -35,9 +35,10 @@ let displayValue;
 
 function display()
 {
-    displayValue = " ";
+    displayValue = "";
     const buttons = document.querySelectorAll('.clicked');
 
+    
     buttons.forEach(button => {
         button.addEventListener('click', function()
         {
@@ -64,23 +65,78 @@ function display()
         });
     });
 
+
+//keyboard support
+    document.addEventListener('keydown',function(event)
+    {
+        let key = event.key;
+
+        switch (key) 
+        {
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+              displayValue+=key;
+              document.querySelector(".display").textContent = displayValue;
+              break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                displayValue+=key;
+                document.querySelector(".display").textContent = displayValue;
+                operator.push(key);
+                document.getElementById("decimal").disabled = false;
+                break;
+            case "=":
+                displayValue =  getNumbers(displayValue);
+                document.querySelector(".display").textContent = displayValue;
+        
+                document.getElementById("decimal").disabled = false;              
+                break;
+            case ".":
+                displayValue+=key;
+                document.querySelector(".display").textContent = displayValue;
+                document.getElementById("decimal").disabled = true;
+            break;
+        }
+    });
+
+
+
+    //display result
     const equalSign =  document.querySelector('.showResult');
     equalSign.addEventListener('click',function()
     {        
-        displayValue =  getNumbers(displayValue);
+        displayValue =  getNumbers(displayValue).toString();
         document.querySelector(".display").textContent = displayValue;
-/*
-        if(operator.length >1)
-        {*/
-        //   operator.shift();
-       //     displayValue += operator[0];
-         //   document.querySelector(".display").textContent = displayValue;
-        //}
 
         document.getElementById("decimal").disabled = false;
-
     });
     
+
+
+    //backspace
+    const backspace = document.querySelector('.backspace');
+    backspace.addEventListener('click',function()
+    {
+        //update operators if one is removed
+        if(displayValue.charAt(displayValue.length-1) === "+" || displayValue.charAt(displayValue.length-1) === "-" || displayValue.charAt(displayValue.length-1) === "*" || displayValue.charAt(displayValue.length-1) === "/")
+        {
+            operator.pop();
+        }
+
+        //update display
+        displayValue = displayValue.slice(0,displayValue.length-1);
+        document.querySelector(".display").textContent = displayValue;
+    }); 
 
 }
 
@@ -107,14 +163,10 @@ function getNumbers(displayValue)
     
     return result;
 
-    
-
-
-
 }
 
 function clearDisplay()
-{
+{ 
     const clear =  document.querySelector('.clear');
     clear.addEventListener('click',function()
     {        
@@ -126,7 +178,17 @@ function clearDisplay()
         document.getElementById("decimal").disabled = false;
 
     });
-
+/*
+    clear.addEventListener('keydown',function()
+    {
+        displayValue =  " ";
+        document.querySelector('.display').textContent = displayValue;
+        firstNum = 0;
+        secondNum = 0;
+        operator = [];
+        document.getElementById("decimal").disabled = false;
+    });
+*/
 }
 
 decimal();
@@ -155,4 +217,21 @@ function round(number)
         return number;
     }
 }
+
+function backspace(displayValue)
+{
+    const backspace = document.querySelector('.backspace');
+    backspace.addEventListener('click',function()
+    {
+        if(displayValue.length-1 === "+" || displayValue.length-1 === "-" || displayValue.length-1 === "*" || displayValue.length-1 === "/")
+        {
+            operator.pop();
+        }
+
+        displayValue = displayValue.slice(0,displayValue.length-1);
+
+    }); 
+}
+
+
 

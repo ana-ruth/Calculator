@@ -92,30 +92,25 @@ function getNumbers(displayValue)
     let nums = displayValue.split(/[+/*-]/);
     firstNum = Number(nums[0]);
     secondNum = Number(nums[1]);
+    
+    //check for division by 0
+    if(secondNum === 0 && operator[0]=== '/'){return 'undefined';}
 
-    console.log(firstNum);
-    console.log(secondNum);
-    console.log(operator);
-
-    result = operate(firstNum,operator[0],secondNum);
+   let result = operate(firstNum,operator[0],secondNum);
+    result = round(result); //round longer decimals to prevent overflow on the screen
 
     if(operator.length >1)
     {
         result += operator[1];
     }
     operator.shift();
-
+    
     return result;
 
-    /*
-    if(secondNum === 0 && operator[0]=== '/'){return 'undefined';}
-    let result =  operate(firstNum,operator[0],secondNum);
-*/
-    //answers with  decimals are rounded to prevent overflow on screen
-   /*
-    if(result == Math.floor(result)) return result;
-    else { return result.toFixed(5);}
-    */
+    
+
+
+
 }
 
 function clearDisplay()
@@ -143,5 +138,21 @@ function decimal()
         document.getElementById("decimal").disabled = true;
     });
 
+}
+
+function round(number)
+{
+    let num = number.toString();
+    if(!num.includes('.')){ return number;}
+
+    let decimalValuePosition = number.toString().indexOf(".");
+    let decimal = number.toString().substring(decimalValuePosition+1)
+    if(decimal.length > 5 )
+    {
+        return number.toFixed(5);
+    }
+    else{
+        return number;
+    }
 }
 

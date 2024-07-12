@@ -111,7 +111,7 @@ function display()
 
 
 
-    //display result
+    /*display result*/
     const equalSign =  document.querySelector('.showResult');
     equalSign.addEventListener('click',function()
     {        
@@ -120,10 +120,28 @@ function display()
 
         document.getElementById("decimal").disabled = false;
     });
+
+    document.addEventListener('keydown',function(event)
+    {
+        let key = event.key;
+
+        switch (key) 
+        {
+            case "Enter":
+                displayValue =  getNumbers(displayValue).toString();
+                document.querySelector(".display").textContent = displayValue;
+        
+                document.getElementById("decimal").disabled = false;
+
+                break;
+        }
+
+    });
+
     
 
 
-    //backspace
+    /*backspace*/
     const backspace = document.querySelector('.backspace');
     backspace.addEventListener('click',function()
     {

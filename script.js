@@ -144,15 +144,27 @@ display();
 clearDisplay();
 
 function getNumbers(displayValue)
-{
+{    
     let nums = displayValue.split(/[+/*-]/);
-    firstNum = Number(nums[0]);
-    secondNum = Number(nums[1]);
-    
+    console.log(nums);
+
+    if(displayValue.charAt(0)=='-')
+    {
+        firstNum = Number(nums[1])*-1;
+        secondNum = Number(nums[2]);
+    }
+    else{
+        firstNum = Number(nums[0]);
+        secondNum = Number(nums[1]);
+
+    }
+
     //check for division by 0
     if(secondNum === 0 && operator[0]=== '/'){return 'undefined';}
 
    let result = operate(firstNum,operator[0],secondNum);
+    console.log(result);
+
     result = round(result); //round longer decimals to prevent overflow on the screen
 
     if(operator.length >1)

@@ -5,29 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="Calculator">
-        <h1 class="display">--</h1>
-        <button class ="clear">Clear</button>
+        <div class="displayCalc">
+            <h1 class="display">--</h1>
+        </div>
 
-        <button class = "clicked">9</button>
-        <button class = "clicked">8</button>
-        <button class = "clicked">7</button>
-        <button class = "clicked">6</button>
-        <button class = "clicked">5</button>
-        <button class = "clicked">4</button>
-        <button class = "clicked">3</button>
-        <button class = "clicked">2</button>
-        <button class = "clicked">1</button>
-        <button class = "clicked">0</button>
-        <button class = "clicked" id ="decimal">.</button>
-        <button class = "showResult">=</button>
-        <button class = "clicked">+</button>
-        <button class = "clicked">-</button>
-        <button class = "clicked">*</button>
-        <button class = "clicked">/</button>
-        <button class="backspace">&#8592</button>
+        <div class="nums&buttons">
+            <div class="firstRow">
+                <button class ="clear" >AC</button>
+                <button class="backspace" >&#8592</button>
+                    
+                <button class = "clicked" id="operations">/</button>
+                        
+            </div>
+    
+    
+    
+            <div class="secondRow">
+                <button class = "clicked">7</button>  
+                <button class = "clicked">8</button>
+                <button class = "clicked">9</button>
+                <button class = "clicked" id="operations">*</button>
+
+            </div>
+    
+            <div class="thirdRow">
+                <button class = "clicked">4</button>
+                <button class = "clicked">5</button>
+                <button class = "clicked">6</button>
+                <button class = "clicked" id="operations">-</button>
+            </div>
+    
+            <div class = "fourthRow">
+                <button class = "clicked">1</button>
+                <button class = "clicked">2</button>
+                <button class = "clicked">3</button>
+                <button class = "clicked" id="operations">+</button>
+     
+            </div>
+    
+            <div class="fifthRow">
+            <button class = "clicked">0</button>
+            <button class = "clicked" id ="decimal">.</button>
+
+            <button class = "showResult" id="operations">=</button>
+    
+    
+            </div>
+
+
+        </div>
+        
+
 
     </div>
 
